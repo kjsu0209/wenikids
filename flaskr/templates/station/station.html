@@ -1,0 +1,133 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  
+{% endblock %}
+
+{% block content %}
+<div class="station_content">
+  <div class="station_title">키즈 스테이션</div>
+  <div class="station_body">
+      <div class="bus_map">
+          <div id = "mapA"></div>
+      </div>
+      <div class="location">
+        <div class="notice_st">
+          이번 정거장은 --- 입니다.
+        </div>
+        <div class="station_list">
+            <div data-spy="scroll" data-target="#navbar-example2" data-offset="0">
+                <ul class="list-group">
+                    {% if g.user and g.user['s_name']!=NULL %}
+                    <p>이번 정거장은 {{ g.user['s_name'] }} 입니다.</p>
+                    {% else %}
+                    <p>승/하차 정거장을 설정하세요</p>
+                    {% endif %}
+                    <li class="list-group-item">정류장 1</li>
+                    <li class="list-group-item">정류장 2</li>
+                    <li class="list-group-item">정류장 3</li>
+                    <li class="list-group-item">정류장 4</li>
+                    <li class="list-group-item">정류장 5</li>
+                  </ul>
+              </div>
+        </div>
+      </div>
+  </div>
+  
+  
+</div>
+
+<script>
+    //Define Markers
+    var minC = {
+        c1: {lat: 35.909751, lng: 128.614296},
+        c2: {lat: 35.905107, lng: 128.608049},
+        c3: {lat: 35.906532, lng: 128.614400},
+        c4: {lat: 35.914214, lng: 128.617277}
+    };
+
+    var map;
+    function initMap() {
+      map = new google.maps.Map(document.getElementById('mapA'), {
+        center: {lat: 35.909751, lng: 128.612106},
+        zoom: 17
+      });
+      var cityCircle = new google.maps.Circle({
+            strokeColor: '#3669DA',
+            strokeOpacity: 0.8,
+            strokeWeight: 2,
+            fillColor: '#3669DA',
+            fillOpacity: 0.35,
+            map: map,
+            center: map.center,
+            radius: 10
+          });
+
+      var marker1 = new google.maps.Marker({
+        position: minC.c1,
+        map: map,
+        title: '정류장 1'
+      });
+      marker1.setMap(map);
+      var marker2 = new google.maps.Marker({
+        position: minC.c2,
+        map: map,
+        title: '정류장 2'
+      });
+      marker2.setMap(map);
+      var marker3 = new google.maps.Marker({
+        position: minC.c3,
+        map: map,
+        title: '정류장 3'
+      });
+      marker3.setMap(map);
+      var marker4 = new google.maps.Marker({
+        position: minC.c4,
+        map: map,
+        title: '정류장 4'
+      });
+      marker4.setMap(map);
+
+      var contentString1 = '정류장 1';
+      var infowindow1 = new google.maps.InfoWindow({
+      content: contentString1
+        });
+      marker1.addListener('click', function() {
+        infowindow1.open(map, marker1);
+      });
+
+      var contentString2 = '정류장 2';
+      var infowindow2 = new google.maps.InfoWindow({
+      content: contentString2
+        });
+      marker2.addListener('click', function() {
+        infowindow2.open(map, marker2);
+      });
+
+      var contentString3 = '정류장 3';
+      var infowindow3 = new google.maps.InfoWindow({
+      content: contentString3
+        });
+      marker3.addListener('click', function() {
+        infowindow3.open(map, marker3);
+      });
+
+      var contentString4 = '정류장 4';
+      var infowindow4 = new google.maps.InfoWindow({
+      content: contentString4
+        });
+      marker4.addListener('click', function() {
+        infowindow4.open(map, marker4);
+      });
+    }
+  
+  
+  
+  </script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAGUEy6707gW1NgA3tC7wxbVlb5W1Z4ykE&callback=initMap"
+  async defer></script>
+    <!-- End Google Map API JavaScript -->
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+    
+
+{% endblock %}

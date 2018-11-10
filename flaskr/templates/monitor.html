@@ -1,0 +1,95 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  
+{% endblock %}
+
+{% block content %}
+
+
+<div class="monitor_content">
+    <div class="m_title">{{ g.user['kindaname'] }} 어린이집 안전 모니터</div>
+    <div class="m_safe">
+        <div class="m_hotline">
+            <div class="hot_title">
+                비상연락망
+            </div>
+            <ul class="list-group">
+                <li class="list-group-item">담임선생님: 010-1111-2222</li>
+                <li class="list-group-item">보조선생님: 010-1234-5678</li>
+                <li class="list-group-item">원장선생님: 010-3333-4444</li>
+                <li class="list-group-item">영양사선생님: 010-9999-1234</li>
+                </ul>
+        </div>
+        <div class="m_info">
+            <div id="box1">
+                버스 차량 안에 사람이 있어요!
+            </div>
+            <ul>
+                <li>버스 후방 감지 센서가 작동하고 있어요</li>
+                <li>안전벨트 센서가 작동하고 있어요</li>
+                <li>차량 내 움직임 감지 센서가 작동하고 있어요</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<script src="http://code.jquery.com/jquery-latest.js"></script>
+<script type="text/javascript">
+var token =null;
+
+var appId = "bHLS6zLJIumtRJeF";
+var secret = "mY48GQcO8BwTULE2";
+
+$.ajax('https://iotmakers.kt.com/oauth/token', {
+    method: 'POST',
+    xhrFields: { withCredentials: true },
+    headers: { 'Authorization': 'Basic ' + btoa(appId + ':' + secret)},
+    data: { grant_type: 'password',
+        username: 'im_gif0014',
+        password: 'M4MELH4CV'
+    }, 
+    success: function(result) {
+        token = result.access_token;
+        getDeviceEvent(token);
+        //console.log(token)
+        // document.write('success');
+    },
+    error: function(xhr,status,error){
+        document.write('fail');
+        console.log(xhr);
+    }
+});
+
+function getDeviceEvent(token){
+var API_URI = ':443/api/v1/streams/uno/log/last';
+
+$.ajax('https://iotmakers.kt.com' + API_URI, {
+    method: 'GET',
+    headers: { 'Authorization': 'Bearer ' + token.access_token},
+    accepts: 'application/json',
+    success: function (data, status, xhr) {
+        var result = $.parseJSON(data);
+        alert(result);
+        $.each(data, function(index, element) {
+            if (result == 1)
+            {
+                //alert(element.body);
+                reviseCss();
+            }
+        });
+   
+    },
+    error: function(xhr,status,e){
+
+    }
+});
+
+function reviseCss(){
+    var box = document.getElementById("box1");
+    box.style.display = "inline";
+}
+}
+
+</script>
+{% endblock %}

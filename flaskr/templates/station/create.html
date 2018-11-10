@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1>{% block title %}정류장 만들기{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+  <form method="post">
+    <label for="s_name">정류장 이름</label>
+    <input name="s_name" id="s_name" value="{{ request.form['s_name'] }}" required>
+    <label for="s_address">정류장 주소</label>
+    <input name="s_address" id="s_address" value="{{ request.form['s_address'] }}" required>
+    <label for="stop_order">정류장 도착순서</label>
+    <input name="stop_order" id="stop_order" value="{{ request.form['stop_order'] }}" required>
+    <label for="stop_kids">내려야 할 사람 수</label>
+    <input name="stop_kidss" id="stop_kids" value="{{ request.form['stop_kids'] }}" required>
+     <input type="submit" value="Save">
+  </form>
+{% endblock %}

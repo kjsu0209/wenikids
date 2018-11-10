@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  
+{% endblock %}
+
+{% block content %}
+<div class="main_section">
+    <div class="card cardA" style=" background-color: #73C055;">
+        <div class="card-body">
+            <h5 class="card-title">
+                {% if g.user %}
+                <p>지금 {{ g.user['classname'] }}반은 미술시간 입니다.</p>
+                <div class="card_timet">
+                    시간표
+                </div>
+                {% else %}
+                <p>반가워요,<br> 어린이 통학 안전관리 서비스 위니키즈 입니다</p>
+                {% endif %}
+            </h5>
+            
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <div class="sectionA">
+        <div id="carouselExampleSlidesOnly cardB" class="carousel slide" data-ride="carousel" style="border-radius: 10px; margin-bottom: 30px;">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                <img class="d-block w-100" src="static/img1.jpg" alt="First slide">
+                </div>
+                <div class="carousel-item">
+                <img class="d-block w-100" src="static/img2.jpg" alt="Second slide">
+                </div>
+            </div>
+        </div>
+        <div class="subsectionA">
+            <div class="cardD" style="margin-right: 30px;">
+                    <h5>담임선생님</h5>
+                    {% if g.user %}
+                    <p>정 승혜 선생님</p>
+                    <p>tel: 010-1234-5678</p>
+                    {% else %}
+                    <p>아이의 어린이집 담임선생님이 누구신지 알려드려요</p>
+                    {% endif %}
+                </div>
+            <div class="cardD">
+                    <h5>알림장</h5>
+                    {% if g.user %}
+                    <p>내일은 현장학습 가는날~<br>도시락을 챙겨주세요</p>
+                    {% else %}
+                    <p>실시간으로 어린이집 알림장을 확인할 수 있어요</p>
+                    {% endif %}
+                </div>
+        </div>
+    </div>
+    <div class="sectionB">
+            <div class="cardC">
+                    <h5>LUNCH</h5>
+                    {% if g.user %}
+                    <p>소고기무국-300kcal<br>
+                    오곡현미밥-120kcal<br>
+                    시금치무침-40kcal<br>
+                    스마일감자-80kcal<br>
+                    계란말이-70kcal</p>
+                    {% else %}
+                    <p>점심식사가 궁금하세요?<br>그러면 위니키즈를 이용하세요</p>
+                    {% endif %}
+                </div>
+            <div class="cardC">
+                    <h5>SNACK</h5>
+                    {% if g.user %}
+                    <p>머핀-200kcal</p>
+                    <p>저지방우유-100kcal</p>
+                    {% else %}
+                    <p>즐거운 간식시간:)<br>우리아이는 어떤 간식을 먹을까요?</p>
+                    {% endif %}
+                </div>
+    </div>
+    
+</div>
+
+{% endblock %}

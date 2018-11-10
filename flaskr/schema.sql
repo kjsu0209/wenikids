@@ -1,0 +1,34 @@
+DROP TABLE IF EXISTS user;
+DROP TABLE IF EXISTS station;
+DROP TABLE IF EXISTS post;
+
+CREATE TABLE user (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  username TEXT UNIQUE NOT NULL,
+  kidname TEXT NOT NULL,
+  kindaname TEXT NOT NULL,
+  classname TEXT NOT NULL,
+  u_address TEXT NOT NULL,
+  u_station TEXT,
+  password TEXT NOT NULL
+);
+
+CREATE TABLE station (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  s_name TEXT UNIQUE NOT NULL,
+  latitude REAL,
+  longitude REAL,
+  s_address TEXT NOT NULL,
+  stop_order INTEGER NOT NULL,
+  stop_kids INTEGER NOT NULL
+);
+
+
+CREATE TABLE post (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  author_id INTEGER NOT NULL,
+  created TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  title TEXT NOT NULL,
+  body TEXT NOT NULL,
+  FOREIGN KEY (author_id) REFERENCES user (id)
+);

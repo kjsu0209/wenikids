@@ -1,0 +1,40 @@
+<!doctype html>
+<title>{% block title %}{% endblock %}위니키즈</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+<nav>
+    <div class="navbar">
+      <a href="{{ url_for('index') }}">
+          <div class="titlebar">
+              <h1>위니키즈</h1>
+          </div>
+      </a>  
+      <div class="menubar">
+        <a href="{{ url_for('monitor') }}"><div class="menu" style=" ">안전 모니터링</div></a>
+        <a href="{{ url_for('station.station') }}"><div class="menu">키즈 스테이션</div></a>
+        <a href="{{ url_for('monitor') }}"><div class="menu">마이 페이지</div></a>
+      </div>
+      <div class="authbar">
+          <ul>
+              {% if g.user %}
+                <li><span>{{ g.user['username'] }}</span>
+                <li><a href="{{ url_for('auth.logout') }}">로그아웃</a>
+              {% else %}
+                <li><a href="{{ url_for('auth.register') }}">회원가입</a>
+                <li><a href="{{ url_for('auth.login') }}">로그인</a>
+              {% endif %}
+            </ul>
+      </div>
+    </div>
+  
+</nav>
+<section class="content">
+  <header>
+    {% block header %}{% endblock %}
+  </header>
+  {% for message in get_flashed_messages() %}
+    <div class="flash">{{ message }}</div>
+  {% endfor %}
+  {% block content %}{% endblock %}
+</section>
